@@ -12,7 +12,7 @@ namespace ECABaseModel
         public Entity()
         {
             Guid = Guid.NewGuid();
-            Owner = World.Instance.ID;
+            Owner = CEC.Instance.ID;
         }
 
         /// <summary>

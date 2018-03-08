@@ -80,6 +80,6 @@ namespace ECABaseModel
         private Dictionary<string, ComponentDefinition> registeredComponents =
             new Dictionary<string, ComponentDefinition>();
 
-        internal IEnumerable<Entity> world = World.Instance;
+        internal IEnumerable<Entity> cec = CEC.Instance;
     }
 }

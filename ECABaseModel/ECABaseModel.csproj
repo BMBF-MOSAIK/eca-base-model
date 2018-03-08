@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Attribute.cs" />
     <Compile Include="Component.cs" />
+    <Compile Include="ComprehensiveEntityCollection.cs" />
     <Compile Include="EntityCollection.cs" />
     <Compile Include="Prototypes\ComponentDefinition.cs" />
     <Compile Include="ComponentRegistry.cs" />
