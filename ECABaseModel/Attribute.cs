@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using ECABaseModel.Prototypes;
-using System.Text;
-using ECABaseModel.Events;
-using ECABaseModel.Exceptions;
 
 namespace ECABaseModel
 {
