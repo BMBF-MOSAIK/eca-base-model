@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using ECABaseModel.Exceptions;
 
-namespace ECABaseModel
+namespace ECABaseModel.Prototypes
 {
     /// <summary>
     /// Represents a modifiable component definition.
@@ -20,7 +17,7 @@ namespace ECABaseModel
     ///     ComponentRegistry.Instance.Register(mesh);
     /// </example>
     /// </summary>
-    public sealed class ComponentDefinition : ReadOnlyComponentDefinition
+    public sealed class ComponentDefinition : ComponentPrototype
     {
         /// <summary>
         /// Constructs an instance of the ComponentDefinition.
@@ -71,14 +68,14 @@ namespace ECABaseModel
         /// <param name="defaultValue">Default value of the new attribute.</param>
         public void AddAttribute(string name, Type type, object defaultValue)
         {
-            AddAttribute(new ReadOnlyAttributeDefinition(name, type, defaultValue, Guid.NewGuid()));
+            AddAttribute(new AttributePrototype(name, type, defaultValue, Guid.NewGuid()));
         }
 
         /// <summary>
         /// Add a new attribute definition to the component definition.
         /// </summary>
         /// <param name="definition">Attribute definition.</param>
-        public void AddAttribute(ReadOnlyAttributeDefinition definition)
+        public void AddAttribute(AttributePrototype definition)
         {
             if (attributeDefinitions.ContainsKey(definition.Name))
                 throw new AttributeDefinitionException("Attribute with such name is already defined.");
@@ -86,15 +83,15 @@ namespace ECABaseModel
             attributeDefinitions[definition.Name] = definition;
         }
 
-        public override ReadOnlyCollection<ReadOnlyAttributeDefinition> AttributeDefinitions
+        public override ReadOnlyCollection<AttributePrototype> AttributeDefinitions
         {
             get
             {
-                return new ReadOnlyCollection<ReadOnlyAttributeDefinition>((IList<ReadOnlyAttributeDefinition>)attributeDefinitions.Values);
+                return new ReadOnlyCollection<AttributePrototype>((IList<AttributePrototype>)attributeDefinitions.Values);
             }
         }
 
-        public override ReadOnlyAttributeDefinition this[string attributeName]
+        public override AttributePrototype this[string attributeName]
         {
             get
             {
@@ -107,12 +104,12 @@ namespace ECABaseModel
             return attributeDefinitions.ContainsKey(attributeName);
         }
 
-        // Type converted from Dictionary<string, ReadOnlyAttributeDefinition> for persistence plugin.
-        private IDictionary<string, ReadOnlyAttributeDefinition> attributeDefinitions =
-            new Dictionary<string, ReadOnlyAttributeDefinition>();
+        // Type converted from Dictionary<string, AttributePrototype> for persistence plugin.
+        private IDictionary<string, AttributePrototype> attributeDefinitions =
+            new Dictionary<string, AttributePrototype>();
 
         // Needed by persistence plugin.
-        private IDictionary<string, ReadOnlyAttributeDefinition> attributeDefinitionsHandler
+        private IDictionary<string, AttributePrototype> attributeDefinitionsHandler
         {
             get { return attributeDefinitions; }
             set { attributeDefinitions = value; }
