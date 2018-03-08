@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using ECABaseModel.Prototypes;
 using System.Text;
 using ECABaseModel.Events;
 using ECABaseModel.Exceptions;
@@ -10,7 +11,7 @@ namespace ECABaseModel
 {
     public class Attribute
     {
-        public Attribute(ReadOnlyAttributeDefinition definition, Component parentComponent)
+        public Attribute(AttributePrototype definition, Component parentComponent)
         {
             ParentComponent = parentComponent;
             Definition = definition;
@@ -96,7 +97,7 @@ namespace ECABaseModel
             ParentComponent.raiseChangeEventFromInternalChange(Definition.Name, CurrentValue);
         }
 
-        public ReadOnlyAttributeDefinition Definition;
+        public AttributePrototype Definition;
         private object CurrentValue;
     }
 }

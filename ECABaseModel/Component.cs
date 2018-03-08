@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ECABaseModel.Events;
+using ECABaseModel.Prototypes;
 
 namespace ECABaseModel
 {
@@ -26,7 +27,7 @@ namespace ECABaseModel
         /// <summary>
         /// The definition that was used to create this component.
         /// </summary>
-        public ReadOnlyComponentDefinition Definition { get; private set; }
+        public ComponentPrototype Definition { get; private set; }
 
         /// <summary>
         /// An entity that contains this component.
@@ -71,7 +72,7 @@ namespace ECABaseModel
             }
         }
 
-        internal Component(ReadOnlyComponentDefinition definition, Entity containingEntity)
+        internal Component(ComponentPrototype definition, Entity containingEntity)
         {
             Guid = Guid.NewGuid();
             ContainingEntity = containingEntity;
@@ -82,7 +83,7 @@ namespace ECABaseModel
         private void InitializeAttributes()
         {
             attributes = new Dictionary<string, Attribute>();
-            foreach (ReadOnlyAttributeDefinition attributeDefinition in Definition.AttributeDefinitions)
+            foreach (AttributePrototype attributeDefinition in Definition.AttributeDefinitions)
             {
                 Attribute attribute = new Attribute(attributeDefinition, this);
                 attributes.Add(attributeDefinition.Name, attribute);

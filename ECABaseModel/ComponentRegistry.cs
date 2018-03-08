@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using ECABaseModel.Events;
 using ECABaseModel.Exceptions;
+using ECABaseModel.Prototypes;
 
 namespace ECABaseModel
 {
     public interface IComponentRegistry
     {
-        ReadOnlyCollection<ReadOnlyComponentDefinition> RegisteredComponents { get; }
+        ReadOnlyCollection<ComponentPrototype> RegisteredComponents { get; }
         void Register(ComponentDefinition definition);
-        ReadOnlyComponentDefinition FindComponentDefinition(string componentName);
+        ComponentPrototype FindComponentDefinition(string componentName);
         event EventHandler<RegisteredComponentEventArgs> RegisteredComponent;
     }
 
@@ -36,12 +37,12 @@ namespace ECABaseModel
         /// <summary>
         /// A collection of registered components.
         /// </summary>
-        public ReadOnlyCollection<ReadOnlyComponentDefinition> RegisteredComponents
+        public ReadOnlyCollection<ComponentPrototype> RegisteredComponents
         {
             get
             {
-                var collection = new List<ReadOnlyComponentDefinition>(registeredComponents.Values);
-                return new ReadOnlyCollection<ReadOnlyComponentDefinition>(collection);
+                var collection = new List<ComponentPrototype>(registeredComponents.Values);
+                return new ReadOnlyCollection<ComponentPrototype>(collection);
             }
         }
 
@@ -66,7 +67,7 @@ namespace ECABaseModel
         /// </summary>
         /// <param name="componentName">Component name.</param>
         /// <returns>Component definition.</returns>
-        public ReadOnlyComponentDefinition FindComponentDefinition(string componentName)
+        public ComponentPrototype FindComponentDefinition(string componentName)
         {
             if (!registeredComponents.ContainsKey(componentName))
                 return null;
