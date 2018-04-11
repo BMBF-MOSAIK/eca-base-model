@@ -44,7 +44,7 @@ namespace ECABaseModel
         /// </summary>
         public ReadOnlyCollection<Component> Components
         {
-            get { return new ReadOnlyCollection<Component>((IList<Component>)components.Values); }
+            get { return new ReadOnlyCollection<Component>(new List<Component>(components.Values)); }
         }
 
         /// <summary>
