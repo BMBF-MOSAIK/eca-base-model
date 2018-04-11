@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using ECABaseModel.Events;
 using ECABaseModel.Exceptions;
 
 namespace ECABaseModel
 {
-    public class EntityCollection : ICollection<Entity>
+    public class EntityCollection : ICollection<Entity>, INotifyCollectionChanged
     {
         public EntityCollection()
         {
@@ -85,6 +86,7 @@ namespace ECABaseModel
         /// Raised when an entity has been removed.
         /// </summary>
         public event EventHandler<EntityEventArgs> RemovedEntity;
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         /// <summary>
         /// Finds an entity by its Guid as string. Throws EntityNotFoundException if entity is not found.
