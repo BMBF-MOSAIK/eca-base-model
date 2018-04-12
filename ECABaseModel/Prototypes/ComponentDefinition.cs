@@ -87,7 +87,7 @@ namespace ECABaseModel.Prototypes
         {
             get
             {
-                return new ReadOnlyCollection<AttributePrototype>((IList<AttributePrototype>)attributeDefinitions.Values);
+                return new ReadOnlyCollection<AttributePrototype>(new List<AttributePrototype>(attributeDefinitions.Values));
             }
         }
 
