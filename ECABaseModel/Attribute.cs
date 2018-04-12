@@ -23,7 +23,7 @@ namespace ECABaseModel
                 return CurrentValue;
             }
 
-            internal set
+            set
             {
                 Set(value);
             }
