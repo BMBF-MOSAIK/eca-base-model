@@ -43,7 +43,7 @@
     <Compile Include="Component.cs" />
     <Compile Include="ComprehensiveEntityCollection.cs" />
     <Compile Include="EntityCollection.cs" />
-    <Compile Include="Prototypes\ComponentDefinition.cs" />
+    <Compile Include="Prototypes\ComponentPrototype.cs" />
     <Compile Include="ComponentRegistry.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Events\ChangedAttributeEventArgs.cs" />
@@ -58,7 +58,7 @@
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prototypes\AttributePrototype.cs" />
-    <Compile Include="Prototypes\ComponentPrototype.cs" />
+    <Compile Include="Prototypes\ReadOnlyComponentPrototype.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

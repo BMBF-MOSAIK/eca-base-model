@@ -24,11 +24,11 @@ namespace ECABaseModel.Events
     /// </summary>
     public class RegisteredComponentEventArgs : EventArgs
     {
-        public RegisteredComponentEventArgs(ComponentPrototype prototype)
+        public RegisteredComponentEventArgs(ReadOnlyComponentPrototype prototype)
         {
             Prototype = prototype;
         }
 
-        public ComponentPrototype Prototype { get; private set; }
+        public ReadOnlyComponentPrototype Prototype { get; private set; }
     }
 }

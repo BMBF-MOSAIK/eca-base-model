@@ -39,7 +39,7 @@ namespace ECABaseModel
         /// <summary>
         /// The prototype that was used to create this component.
         /// </summary>
-        public ComponentPrototype Prototype { get; private set; }
+        public ReadOnlyComponentPrototype Prototype { get; private set; }
 
         /// <summary>
         /// An entity that contains this component.
@@ -84,7 +84,7 @@ namespace ECABaseModel
             }
         }
 
-        internal Component(ComponentPrototype prototype, Entity containingEntity)
+        internal Component(ReadOnlyComponentPrototype prototype, Entity containingEntity)
         {
             Guid = Guid.NewGuid();
             ContainingEntity = containingEntity;

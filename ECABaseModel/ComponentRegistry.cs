@@ -22,9 +22,9 @@ namespace ECABaseModel
 {
     public interface IComponentRegistry
     {
-        ReadOnlyCollection<ComponentPrototype> RegisteredComponents { get; }
-        void Register(ComponentPrototype prototype);
-        ComponentPrototype FindComponentPrototype(string componentName);
+        ReadOnlyCollection<ReadOnlyComponentPrototype> RegisteredComponents { get; }
+        void Register(ReadOnlyComponentPrototype prototype);
+        ReadOnlyComponentPrototype FindComponentPrototype(string componentName);
         event EventHandler<RegisteredComponentEventArgs> RegisteredComponent;
     }
 
@@ -47,12 +47,12 @@ namespace ECABaseModel
         /// <summary>
         /// A collection of registered components.
         /// </summary>
-        public ReadOnlyCollection<ComponentPrototype> RegisteredComponents
+        public ReadOnlyCollection<ReadOnlyComponentPrototype> RegisteredComponents
         {
             get
             {
-                var collection = new List<ComponentPrototype>(registeredComponents.Values);
-                return new ReadOnlyCollection<ComponentPrototype>(collection);
+                var collection = new List<ReadOnlyComponentPrototype>(registeredComponents.Values);
+                return new ReadOnlyCollection<ReadOnlyComponentPrototype>(collection);
             }
         }
 
@@ -61,7 +61,7 @@ namespace ECABaseModel
         /// already registered.
         /// </summary>
         /// <param name="prototype">New component prototype.</param>
-        public void Register(ComponentPrototype prototype)
+        public void Register(ReadOnlyComponentPrototype prototype)
         {
             if (registeredComponents.ContainsKey(prototype.Name))
                 throw new ComponentRegistrationException("Component with the same name is already registered.");
@@ -77,7 +77,7 @@ namespace ECABaseModel
         /// </summary>
         /// <param name="componentName">Component name.</param>
         /// <returns>Component prototype.</returns>
-        public ComponentPrototype FindComponentPrototype(string componentName)
+        public ReadOnlyComponentPrototype FindComponentPrototype(string componentName)
         {
             if (!registeredComponents.ContainsKey(componentName))
                 return null;
@@ -87,8 +87,8 @@ namespace ECABaseModel
 
         public event EventHandler<RegisteredComponentEventArgs> RegisteredComponent;
 
-        private Dictionary<string, ComponentPrototype> registeredComponents =
-            new Dictionary<string, ComponentPrototype>();
+        private Dictionary<string, ReadOnlyComponentPrototype> registeredComponents =
+            new Dictionary<string, ReadOnlyComponentPrototype>();
 
         internal IEnumerable<Entity> cec = CEC.Instance;
     }
