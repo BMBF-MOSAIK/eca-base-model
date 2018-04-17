@@ -60,7 +60,7 @@ namespace ECABaseModel
             return (T)Value;
         }
 
-        internal void Set(object value)
+        public void Set(object value)
         {
             if (value != null && CurrentValue != null && !value.Equals(CurrentValue))
             {
