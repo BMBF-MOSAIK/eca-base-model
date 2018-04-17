@@ -23,7 +23,7 @@ namespace ECABaseModel.Prototypes
     ///
     /// It can be used to define new components as following:
     /// <example>
-    ///     ComponentDefinition mesh = new ComponentDefinition("mesh");
+    ///     ComponentPrototype mesh = new ComponentPrototype("mesh");
     ///     mesh.AddAttribute<string>("uri", "mesh://default");
     ///     mesh.AddAttribute<bool>("visible");
     ///     mesh.AddAttribute<Vector>("scale", new Vector(1, 1, 1));
@@ -52,7 +52,7 @@ namespace ECABaseModel.Prototypes
         }
 
         /// <summary>
-        /// Adds a new attribute definition to the component prototype. Default value for the type is used as default
+        /// Adds a new attribute prototype to the component prototype. Default value for the type is used as default
         /// value for the attribute.
         /// </summary>
         /// <typeparam name="T">Type of the new attribute.</typeparam>
@@ -63,7 +63,7 @@ namespace ECABaseModel.Prototypes
         }
 
         /// <summary>
-        /// Adds a new attribute definition to the component prototype. Specified default value is used.
+        /// Adds a new attribute prototype to the component prototype. Specified default value is used.
         /// </summary>
         /// <typeparam name="T">Type of the new attribute.</typeparam>
         /// <param name="name">Name of the new attribute.</param>
@@ -74,7 +74,7 @@ namespace ECABaseModel.Prototypes
         }
 
         /// <summary>
-        /// Adds a new attribute definition to the component prototype with specified default value and type.
+        /// Adds a new attribute prototype to the component prototype with specified default value and type.
         /// </summary>
         /// <param name="name">Name of the new attribute.</param>
         /// <param name="type">Type of the new attribute.</param>
