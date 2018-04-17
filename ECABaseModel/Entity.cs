@@ -128,25 +128,5 @@ namespace ECABaseModel
         private IDictionary<string, Component> components = new Dictionary<string, Component>();
 
         internal IComponentRegistry componentRegistry = ComponentRegistry.Instance;
-
-        // Needed by persistence plugin.
-        private IDictionary<string, Component> ComponentsDictionaryHandler
-        {
-            get
-            {
-                return components;
-            }
-            set
-            {
-                // Firstly we need to remove the handler from all components and then re-add it to new set of
-                // components. If we don't do that, we may get our handler called for components that are not part of
-                // this entity or simply called twice for a single event.
-                foreach (KeyValuePair<string, Component> entry in components)
-                    entry.Value.ChangedAttribute -= HandleChangedComponentAttribute;
-                foreach (KeyValuePair<string, Component> entry in value)
-                    entry.Value.ChangedAttribute += HandleChangedComponentAttribute;
-                components = value;
-            }
-        }
     }
 }
