@@ -19,11 +19,11 @@ using System.Text;
 namespace ECABaseModel.Exceptions
 {
     /// <summary>
-    /// Raised when an attribute could not be added to the component definition.
+    /// Raised when an attribute could not be added to the component prototype.
     /// </summary>
-    public class AttributeDefinitionException : Exception
+    public class AttributePrototypeException : Exception
     {
-        public AttributeDefinitionException() : base() {}
-        public AttributeDefinitionException(string message) : base(message) { }
+        public AttributePrototypeException() : base() {}
+        public AttributePrototypeException(string message) : base(message) { }
     }
 }

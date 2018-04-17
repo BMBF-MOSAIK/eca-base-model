@@ -52,7 +52,7 @@
     <Compile Include="Events\ProposeAttributeChangeEventArgs.cs" />
     <Compile Include="Events\RegisteredComponentEventArgs.cs" />
     <Compile Include="Exceptions\AttributeAssignmentException.cs" />
-    <Compile Include="Exceptions\AttributeDefinitionException.cs" />
+    <Compile Include="Exceptions\AttributePrototypeException.cs" />
     <Compile Include="Exceptions\ComponentAccessException.cs" />
     <Compile Include="Exceptions\ComponentRegistrationException.cs" />
     <Compile Include="Exceptions\EntityNotFoundException.cs" />

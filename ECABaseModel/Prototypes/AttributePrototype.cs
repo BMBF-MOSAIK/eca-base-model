@@ -22,7 +22,7 @@ using System.Reflection;
 namespace ECABaseModel.Prototypes
 {
     /// <summary>
-    /// Represents a read-only attribute definition.
+    /// Represents a read-only attribute prototype.
     /// </summary>
     public sealed class AttributePrototype
     {
@@ -47,7 +47,7 @@ namespace ECABaseModel.Prototypes
             {
                 if (e.InnerException is InvalidCastException)
                 {
-                    throw new AttributeDefinitionException(
+                    throw new AttributePrototypeException(
                         "Default value for the attribute can not be cast to its type.");
                 }
                 else
@@ -58,7 +58,7 @@ namespace ECABaseModel.Prototypes
         }
 
         /// <summary>
-        /// GUID that identifies this attribute definition.
+        /// GUID that identifies this attribute prototype.
         /// </summary>
         public Guid Guid { get; private set; }
 

@@ -20,11 +20,11 @@ namespace ECABaseModel
 {
     public class Attribute
     {
-        public Attribute(AttributePrototype definition, Component parentComponent)
+        public Attribute(AttributePrototype prototype, Component parentComponent)
         {
             ParentComponent = parentComponent;
-            Definition = definition;
-            Value = definition.DefaultValue;
+            Prototype = prototype;
+            Value = prototype.DefaultValue;
         }
 
         public Component ParentComponent { get; private set; }
@@ -44,7 +44,7 @@ namespace ECABaseModel
 
         public Type Type
         {
-            get { return Definition.Type; }
+            get { return Prototype.Type; }
         }
 
         private object convertValueToAttributeType(object value)
@@ -69,16 +69,16 @@ namespace ECABaseModel
             var oldValue = CurrentValue;
             CurrentValue = value;
             registerChangedEventHandlers();
-            ParentComponent.raiseChangeEvent(Definition.Name, oldValue, CurrentValue);
+            ParentComponent.raiseChangeEvent(Prototype.Name, oldValue, CurrentValue);
         }
 
         private void deRegisterEventHandler()
         {
-            if (Definition.HasNotifyCollectionChangedNotification)
+            if (Prototype.HasNotifyCollectionChangedNotification)
             {
                 ((INotifyCollectionChanged)Value).CollectionChanged -= OnCollectionChanged;
             }
-            else if (Definition.HasPropertyChangedNotification)
+            else if (Prototype.HasPropertyChangedNotification)
             {
                 ((INotifyPropertyChanged)Value).PropertyChanged -= OnPropertyChanged;
             }
@@ -86,11 +86,11 @@ namespace ECABaseModel
 
         private void registerChangedEventHandlers()
         {
-            if (Definition.HasNotifyCollectionChangedNotification)
+            if (Prototype.HasNotifyCollectionChangedNotification)
             {
                 ((INotifyCollectionChanged)Value).CollectionChanged += OnCollectionChanged;
             }
-            else if (Definition.HasPropertyChangedNotification)
+            else if (Prototype.HasPropertyChangedNotification)
             {
                 ((INotifyPropertyChanged)Value).PropertyChanged += OnPropertyChanged;
             }
@@ -98,15 +98,15 @@ namespace ECABaseModel
 
         void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            ParentComponent.raiseChangeEventFromInternalChange(Definition.Name, CurrentValue);
+            ParentComponent.raiseChangeEventFromInternalChange(Prototype.Name, CurrentValue);
         }
 
         void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            ParentComponent.raiseChangeEventFromInternalChange(Definition.Name, CurrentValue);
+            ParentComponent.raiseChangeEventFromInternalChange(Prototype.Name, CurrentValue);
         }
 
-        public AttributePrototype Definition;
+        public AttributePrototype Prototype;
         private object CurrentValue;
     }
 }

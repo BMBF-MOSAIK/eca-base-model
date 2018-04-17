@@ -23,8 +23,8 @@ namespace ECABaseModel
     public interface IComponentRegistry
     {
         ReadOnlyCollection<ComponentPrototype> RegisteredComponents { get; }
-        void Register(ComponentDefinition definition);
-        ComponentPrototype FindComponentDefinition(string componentName);
+        void Register(ComponentPrototype prototype);
+        ComponentPrototype FindComponentPrototype(string componentName);
         event EventHandler<RegisteredComponentEventArgs> RegisteredComponent;
     }
 
@@ -38,7 +38,7 @@ namespace ECABaseModel
     public delegate void ComponentUpgrader(Component oldComponent, Component newComponent);
 
     /// <summary>
-    /// Manages component definitions.
+    /// Manages component prototypes.
     /// </summary>
     public sealed class ComponentRegistry : IComponentRegistry
     {
@@ -57,27 +57,27 @@ namespace ECABaseModel
         }
 
         /// <summary>
-        /// Registers a new component definition. An exception will be raised if the component with the same name is 
+        /// Registers a new component prototype. An exception will be raised if the component with the same name is 
         /// already registered.
         /// </summary>
-        /// <param name="definition">New component definition.</param>
-        public void Register(ComponentDefinition definition)
+        /// <param name="prototype">New component prototype.</param>
+        public void Register(ComponentPrototype prototype)
         {
-            if (registeredComponents.ContainsKey(definition.Name))
+            if (registeredComponents.ContainsKey(prototype.Name))
                 throw new ComponentRegistrationException("Component with the same name is already registered.");
 
-            registeredComponents.Add(definition.Name, definition);
+            registeredComponents.Add(prototype.Name, prototype);
 
             if (RegisteredComponent != null)
-                RegisteredComponent(this, new RegisteredComponentEventArgs(definition));
+                RegisteredComponent(this, new RegisteredComponentEventArgs(prototype));
         }
 
         /// <summary>
-        /// Finds component definition by component's name. If component is not defined, null is returned.
+        /// Finds component prototype by component's name. If component is not defined, null is returned.
         /// </summary>
         /// <param name="componentName">Component name.</param>
-        /// <returns>Component definition.</returns>
-        public ComponentPrototype FindComponentDefinition(string componentName)
+        /// <returns>Component prototype.</returns>
+        public ComponentPrototype FindComponentPrototype(string componentName)
         {
             if (!registeredComponents.ContainsKey(componentName))
                 return null;
@@ -87,8 +87,8 @@ namespace ECABaseModel
 
         public event EventHandler<RegisteredComponentEventArgs> RegisteredComponent;
 
-        private Dictionary<string, ComponentDefinition> registeredComponents =
-            new Dictionary<string, ComponentDefinition>();
+        private Dictionary<string, ComponentPrototype> registeredComponents =
+            new Dictionary<string, ComponentPrototype>();
 
         internal IEnumerable<Entity> cec = CEC.Instance;
     }

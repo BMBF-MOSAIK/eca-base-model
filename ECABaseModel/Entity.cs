@@ -118,11 +118,11 @@ namespace ECABaseModel
 
         private void CreateComponent(string componentName)
         {
-            var definition = ComponentRegistry.Instance.FindComponentDefinition(componentName);
-            if (definition == null)
+            var prototype = ComponentRegistry.Instance.FindComponentPrototype(componentName);
+            if (prototype == null)
                 throw new ComponentAccessException("Component with given name '" + componentName + "' is not registered.");
 
-            Component component = new Component(definition, this);
+            Component component = new Component(prototype, this);
             components[componentName] = component;
 
             // Register for attribute updates in new component.

@@ -21,13 +21,13 @@ namespace ECABaseModel
     public sealed class Component
     {
         /// <summary>
-        /// Returns the name of the component. This is a shorthand for Definition.Name
+        /// Returns the name of the component. This is a shorthand for Prototype.Name
         /// </summary>
         public string Name
         {
             get
             {
-                return Definition.Name;
+                return Prototype.Name;
             }
         }
 
@@ -37,9 +37,9 @@ namespace ECABaseModel
         public Guid Guid { get; private set; }
 
         /// <summary>
-        /// The definition that was used to create this component.
+        /// The prototype that was used to create this component.
         /// </summary>
-        public ComponentPrototype Definition { get; private set; }
+        public ComponentPrototype Prototype { get; private set; }
 
         /// <summary>
         /// An entity that contains this component.
@@ -55,8 +55,8 @@ namespace ECABaseModel
         {
             get
             {
-                if (!Definition.ContainsAttributeDefinition(attributeName))
-                    throw new KeyNotFoundException("Attribute is not present in the component definition.");
+                if (!Prototype.ContainsAttributePrototype(attributeName))
+                    throw new KeyNotFoundException("Attribute is not present in the component prototype.");
 
                 return attributes[attributeName];
             }
@@ -84,21 +84,21 @@ namespace ECABaseModel
             }
         }
 
-        internal Component(ComponentPrototype definition, Entity containingEntity)
+        internal Component(ComponentPrototype prototype, Entity containingEntity)
         {
             Guid = Guid.NewGuid();
             ContainingEntity = containingEntity;
-            Definition = definition;
+            Prototype = prototype;
             InitializeAttributes();
         }
 
         private void InitializeAttributes()
         {
             attributes = new Dictionary<string, Attribute>();
-            foreach (AttributePrototype attributeDefinition in Definition.AttributeDefinitions)
+            foreach (AttributePrototype attributePrototype in Prototype.AttributePrototypes)
             {
-                Attribute attribute = new Attribute(attributeDefinition, this);
-                attributes.Add(attributeDefinition.Name, attribute);
+                Attribute attribute = new Attribute(attributePrototype, this);
+                attributes.Add(attributePrototype.Name, attribute);
             }
         }
 
