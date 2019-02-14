@@ -22,6 +22,8 @@ namespace ECABaseModel
 {
     public class EntityCollection : ICollection<Entity>, INotifyCollectionChanged
     {
+        public Guid Guid = Guid.NewGuid();
+
         public EntityCollection()
         {
 
